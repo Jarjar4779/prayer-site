@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css'; // Import your CSS
 
-
 const PrayerForm = () => {
   const [name, setName] = useState('');
   const [prayer, setPrayer] = useState('');
@@ -13,6 +12,7 @@ const PrayerForm = () => {
     const fetchPrayers = async () => {
       try {
         const response = await axios.get('https://prayer-site.onrender.com/api/prayers');
+        console.log('Prayers fetched:', response.data);  // Check the fetched data
         setPrayers(response.data);
       } catch (error) {
         console.error('Error fetching prayers:', error);
@@ -42,7 +42,7 @@ const PrayerForm = () => {
     <div>
       <h1>Prayer Requests</h1>
       <form onSubmit={handleSubmit} className="sticky-form">
-      <textarea
+        <textarea
           placeholder="What you need prayer for"
           value={prayer}
           onChange={(e) => setPrayer(e.target.value)}
@@ -58,13 +58,17 @@ const PrayerForm = () => {
       </form>
 
       <div className="prayer-list">
-        {prayers.map((prayerRequest) => (
-          <div key={prayerRequest._id} className="prayer-item">
-            <h3>{prayerRequest.prayer}</h3>
-            <p>{prayerRequest.name}</p>
-            <small>{new Date(prayerRequest.date).toLocaleString()}</small>
-          </div>
-        ))}
+        {prayers.length > 0 ? (
+          prayers.map((prayerRequest) => (
+            <div key={prayerRequest._id} className="prayer-item">
+              <h3>{prayerRequest.prayer}</h3>
+              <p>{prayerRequest.name}</p>
+              <small>{new Date(prayerRequest.date).toLocaleString()}</small>
+            </div>
+          ))
+        ) : (
+          <p>No prayers available at the moment.</p>
+        )}
       </div>
     </div>
   );
