@@ -12,7 +12,7 @@ const PrayerForm = () => {
   useEffect(() => {
     const fetchPrayers = async () => {
       try {
-        const response = await axios.get('https://prayer-site.onrender.com');
+        const response = await axios.get('https://prayer-site.onrender.com/api/prayers');
         setPrayers(response.data);
       } catch (error) {
         console.error('Error fetching prayers:', error);
@@ -26,7 +26,7 @@ const PrayerForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://prayer-site.onrender.com', {
+      const response = await axios.post('https://prayer-site.onrender.com/api/prayers', {
         name,
         prayer,
       });
