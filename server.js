@@ -1,21 +1,29 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://jared:bgp8RBHynqBOWg8U@prayers.c4ysq.mongodb.net/?retryWrites=true&w=majority&appName=Prayers')
-// Prayer model
-const prayerSchema = new mongoose.Schema({
-  name: String,
-  prayer: String,
-  date: { type: Date, default: Date.now },
-});
-const Prayer = mongoose.model('Prayer', prayerSchema);
+const mongoURI = process.env.MONGO_URI;
+
+mongoose
+  .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 // Middleware
 app.use(cors()); // Enable CORS
 app.use(express.json()); // Enable JSON body parsing
+
+// Prayer Model
+const PrayerSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  prayer: { type: String, required: true },
+});
+
+const Prayer = mongoose.model('Prayer', PrayerSchema);
 
 // Routes
 // GET route for prayers
