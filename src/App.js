@@ -12,8 +12,8 @@ const PrayerForm = () => {
     const fetchPrayers = async () => {
       try {
         const response = await axios.get('https://prayer-site.onrender.com/api/prayers');
-        console.log('Prayers fetched:', response.data);  // Check the fetched data
-        setPrayers(response.data);
+        // Reverse the prayers array so the latest prayer is first
+        setPrayers(response.data.reverse());
       } catch (error) {
         console.error('Error fetching prayers:', error);
       }
@@ -30,7 +30,7 @@ const PrayerForm = () => {
         name,
         prayer,
       });
-      setPrayers([response.data, ...prayers]); // Add the new prayer to the state
+      setPrayers([response.data, ...prayers]); // Add the new prayer to the state at the beginning
       setName('');
       setPrayer('');
     } catch (error) {
@@ -58,17 +58,13 @@ const PrayerForm = () => {
       </form>
 
       <div className="prayer-list">
-        {prayers.length > 0 ? (
-          prayers.map((prayerRequest) => (
-            <div key={prayerRequest._id} className="prayer-item">
-              <h3>{prayerRequest.prayer}</h3>
-              <p>{prayerRequest.name}</p>
-              <small>{new Date(prayerRequest.date).toLocaleString()}</small>
-            </div>
-          ))
-        ) : (
-          <p>No prayers available at the moment.</p>
-        )}
+        {prayers.map((prayerRequest) => (
+          <div key={prayerRequest._id} className="prayer-item">
+            <h3>{prayerRequest.prayer}</h3>
+            <p>{prayerRequest.name}</p>
+            <small>{new Date(prayerRequest.date).toLocaleString()}</small>
+          </div>
+        ))}
       </div>
     </div>
   );
