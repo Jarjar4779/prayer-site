@@ -1,0 +1,149 @@
+/* General body and layout settings */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(36, 36, 36);
+  color: rgb(211, 211, 211);
+}
+
+h1, h2, h3 {
+  color: rgb(211, 211, 211);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+/* Sticky form styles */
+.sticky-form {
+  position: sticky;
+  top: 0;
+  background-color: rgb(240, 240, 240);
+  padding: 20px;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px; /* Ensures the form doesn't grow too large */
+  margin: 0 auto; /* Centers the form horizontally */
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  background-color: rgb(240, 240, 240);
+  box-sizing: border-box; /* Include padding in the width calculation */
+  display: flex;
+  flex-direction: column; /* Stack form inputs vertically */
+  align-items: center; /* Center content horizontally */
+  gap: 10px; /* Add spacing between elements */
+}
+
+/* Form input, textarea, and button styles */
+.sticky-form input, .sticky-form textarea, .sticky-form button {
+  width: 100%; /* Ensures full width but with max-width constraint */
+  max-width: 500px; /* Ensures inputs don't stretch too wide */
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+/* Button styles */
+.sticky-form button {
+  background-color: rgb(53,53,53);
+  color: rgb(211, 211, 211);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 1rem;
+}
+
+.sticky-form button:hover {
+  background-color: rgb(36,36,36);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .sticky-form {
+    padding: 15px; /* Reduce padding on smaller screens */
+    max-width: 90%; /* Allow form to be a bit wider on small screens */
+  }
+
+  .sticky-form input, .sticky-form textarea, .sticky-form button {
+    max-width: 100%; /* Allow inputs to take full width of container */
+  }
+}
+
+
+/* Prayer list (grid) styles */
+.prayer-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Flexible grid items */
+  gap: 1.5rem;
+  padding: 20px; /* Add padding to prayer list container */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.prayer-item {
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prayer-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.prayer-item h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: rgb(8, 10, 136);
+}
+
+.prayer-item p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.prayer-item small {
+  color: #888;
+}
+
+/* Responsive styles for mobile devices */
+@media screen and (max-width: 600px) {
+  .sticky-form {
+    padding: 15px;
+    margin-top: 10px;
+  }
+
+  .sticky-form input, .sticky-form textarea, .sticky-form button {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .prayer-list {
+    grid-template-columns: 1fr; /* Stack the prayer items in a single column on smaller screens */
+  }
+
+  .prayer-item {
+    padding: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  h1 {
+    font-size: 2rem; /* Smaller title font size for very small screens */
+  }
+}
